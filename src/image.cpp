@@ -75,9 +75,9 @@ void print_img(Img img)
 void binarization(Img img_in, Img& img_out, int limiar)
 {
 	copy_img(img_in, img_out);
-	for(int i = 0; i < img_in.width; i++)
+	for(int i = 0; i < img_out.width; i++)
 	{
-		for( int j = 0; j < img_in.height; j++)
+		for( int j = 0; j < img_out.height; j++)
 		{
 			if(img_out.matrix[i][j] >= limiar)
 			{
@@ -85,6 +85,28 @@ void binarization(Img img_in, Img& img_out, int limiar)
 			}
 			else
 				img_out.matrix[i][j] = 0;
+		}
+	}
+}
+/*!
+ * Given a limiar, transfor the matrix in a solorized matrix
+ * values below the limiar are negativated becoming 255 - actual value.
+ *
+ * @param img_int Input image struct.
+ * @param img_out Output image struct.
+ * @param limiar Limiar delimiter of the function.
+ */
+void solarization(Img img_in, Img& img_out, int limiar)
+{
+	copy_img(img_in, img_out);
+	for(int i = 0; i < img_out.width; i++)
+	{
+		for( int j = 0; j < img_out.height; j++)
+		{
+			if(img_out.matrix[i][j] < limiar)
+			{
+				img_out.matrix[i][j] = 255 - img_out.matrix[i][j];
+			}
 		}
 	}
 }

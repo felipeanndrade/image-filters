@@ -36,9 +36,27 @@ void print_img(Img img)
 	cout << endl;
 }
 
+void copy_img(Img img_in, Img& img_out)
+{
+	img_out.width = img_in.width;
+	img_out.height = img_in.height;
+	for(int i = 0; i < img_in.width; i++)
+	{
+		for(int j = 0; j < img_in.height; j++)
+		{
+			img_out.matrix[i][j] = img_in.matrix[i][j];
+		}
+	}
+}
 
 int main()
 {
+	Img in, out;
+
+	cin >> in.width >> in.height;
+	read_img(in);
+	print_img(out);
+
 	return 0;
 }
 
