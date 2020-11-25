@@ -29,7 +29,7 @@ void print_img(Img img)
 	{
 		for(int j = 0; j < img.height; j++)
 		{
-			cout << img.matrix[i][j] << " ";
+			cout << img.matrix[i][j] << "  ";
 		}
 		cout << endl;
 	}
@@ -49,12 +49,36 @@ void copy_img(Img img_in, Img& img_out)
 	}
 }
 
+void reflection(Img img_in, Img& img_out)
+{
+	copy_img(img_in, img_out);
+	int mid_width; 
+	int m_end = img_out.width - 1;
+
+	if(img_out.width % 2 == 0)
+		mid_width = img_out.width/2;
+	else
+		mid_width = (img_out.width/2) + 1;
+
+	for(int i = 0; i < img_out.height; i++)
+	{
+		for(int j = 0; j < mid_width; j++)
+		{
+			img_out.matrix[i][j] = img_out.matrix[i][m_end];
+			m_end--;
+		}
+		m_end = img_out.width - 1;
+	}
+}
+
 int main()
 {
 	Img in, out;
 
 	cin >> in.width >> in.height;
+
 	read_img(in);
+	reflection(in, out);
 	print_img(out);
 
 	return 0;
