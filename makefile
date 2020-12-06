@@ -1,14 +1,34 @@
-all: lip-project 
-	 
-lip-project: main.o image_processing.o
-	g++ -o lip-project main.o image_processing.o
-		 
-main.o: src/main.cpp include/image_processing.hpp
-	g++ -o main.o src/main.cpp -c -W -Wall -ansi -pedantic
-		 
-image_processing.o: src/image_processing.cpp include/image_processing.hpp
-	g++ -o image_processing.o src/image_processing.cpp -c -W -Wall -ansi -pedantic
-		 
-clean:
-	rm -rf *.o *~ lip-project
+PROJECT_NAME := image-processing
+CXX := g++
+CXXFLAGS := -W -Wall -ansi -pedantic
+RM := -rm
 
+OBJ_DIR := ./build
+INC_DIR := ./include
+SRC_DIR := ./src
+BIN_DIR := ./bin
+
+SRC := $(wildcard src/*.cpp)
+INC := $(wildcard include/*.hpp)
+OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+
+all: project 
+
+project: $(OBJ) $(INC) | $(BIN_DIR)
+	$(CXX) $(OBJ) $(CXXFLAGS) -o $(BIN_DIR)/$(PROJECT_NAME)
+	@ln $(BIN_DIR)/$(PROJECT_NAME) $(PROJECT_NAME)
+
+$(OBJ): 
+		$(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp $(INC) | $(OBJ_DIR)
+		$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+		@mkdir -p $(OBJ_DIR)
+
+$(BIN_DIR):
+		@mkdir -p $(BIN_DIR)
+
+clean: 
+	@$(RM) -f image-processing 
+	@$(RM) -r $(OBJ_DIR)
+	@$(RM) -r $(BIN_DIR)
