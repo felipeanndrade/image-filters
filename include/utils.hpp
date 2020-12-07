@@ -27,4 +27,6 @@ void read_image(char file_path[], Img& img);
  */
 bool save_image(char file_name[], Img img);
 
+void copy_img(Img img_in, Img& img_out);
+
 #endif
