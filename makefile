@@ -30,5 +30,5 @@ $(BIN_DIR):
 
 clean: 
 	@$(RM) -f image-processing 
-	@$(RM) -r $(OBJ_DIR)
-	@$(RM) -r $(BIN_DIR)
+#	@$(RM) -r $(OBJ_DIR)
+#	@$(RM) -r $(BIN_DIR)
