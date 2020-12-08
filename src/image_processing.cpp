@@ -49,8 +49,17 @@ void compute_negative(Img img_in, Img& img_out)
 
 void rotate_anti_h(Img img_in, Img& img_out)
 {
-	// Just to get the values of width and height.
 	copy_img(img_in, img_out);
+	int mid_width;
+	int aux[MAX];
+	int m_end = img_out.width - 1;
+
+	if(img_out.width % 2 == 0)
+		mid_width = img_out.width/2;
+	else
+		mid_width = (img_out.width/2) + 1;
+
+
 	for(int i = 0; i < img_in.width; i++)
 	{
 		for(int j = 0; j < img_in.height; j++)
@@ -58,17 +67,19 @@ void rotate_anti_h(Img img_in, Img& img_out)
 			img_out.matrix[j][i] = img_in.matrix[i][j];
 		}
 	}
-
-	//int aux[MAX];
-	int lenght = img_out.height;
-	for(int i = 0; i < img_out.height/2 + 1; i++)
+	
+	for(int i = 0; i < mid_width; i++)
 	{
-		for(int j = 0; j < img_out.width; j++)
-		{
+		for(int j = 0; j < img_out.height; j++)
+			aux[j] = img_out.matrix[i][j];
 
-		}
-		img_out.matrix[0][i] = img_out.matrix[0][lenght];
-		lenght--;
+		for(int j = 0; j < img_out.height; j++)
+			img_out.matrix[i][j] = img_out.matrix[m_end][j];
+
+		for(int j = 0; j < img_out.height; j++)
+			img_out.matrix[m_end][j] = aux[j];
+
+		m_end--;
 	}
 }
 

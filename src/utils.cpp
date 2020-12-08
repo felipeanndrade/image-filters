@@ -15,8 +15,9 @@ void read_image(char file_path[], Img& img)
 	file.open(file_path);
 	if(!file.is_open())
 	{
-		cout << "Error: Could not open the file" << endl;
-		exit(0);
+		cout << "!!! ---------------------------------------------------!!!" << endl;
+		cout << "Error: Could not open the file !" << endl;
+		cout << "!!! ---------------------------------------------------!!!" << endl;
 	}
   
 	file.getline(img.header, 3);
@@ -41,8 +42,9 @@ bool save_image(char file_name[], Img img)
 
 	if(!file.is_open())
 	{
-		cout << "Error: Could not open the file" << endl;
-		exit(0);
+		cout << "!!! --------------------------------------------------!!!" << endl;
+		cout << "Error: Could not open the file !" << endl;
+		cout << "!!! --------------------------------------------------!!!" << endl;
 	}
 
 	file << img.header << endl;

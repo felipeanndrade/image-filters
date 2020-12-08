@@ -21,8 +21,8 @@ void render_menu()
 	char function_list[] = " *  Binarization                              0\n"
 						   " *  Negative                                  1\n" 
 						   " *  Solarization                              2\n" 
-						   " *  Rotate 90 degrees clockwise               3\n" 
-						   " *  Rotate 90 degrees anti-clockwise          4\n"
+						   " *  Rotate 90 degrees anti-clockwise          3\n" 
+						   " *  Flip image                                4\n"
 						   " *  Crop image                                5\n"
 						   " *  Reduce image size                         6\n"
 						   " *  Increase image size                       7\n"
@@ -66,6 +66,40 @@ void render_menu()
 
 				read_image(image_path, in);
 				binarization(in, out, limiar);
+				save_image("output.pgm", out);	
+				break;
+			case 1:
+				cout << "Type the path of the image: " << endl;
+				cin >> image_path;
+
+				read_image(image_path, in);
+				compute_negative(in, out);
+				save_image("output.pgm", out);	
+				break;
+			case 2:
+				cout << "Type the path of the image: " << endl;
+				cin >> image_path;
+				cout << "Type the limiar for the solarization" << endl;
+				cin >> limiar;
+
+				read_image(image_path, in);
+				solarization(in, out, limiar);
+				save_image("output.pgm", out);	
+				break;
+			case 3:
+				cout << "Type the path of the image: " << endl;
+				cin >> image_path;
+
+				read_image(image_path, in);
+				rotate_anti_h(in, out);
+				save_image("output.pgm", out);	
+				break;
+			case 4:
+				cout << "Type the path of the image: " << endl;
+				cin >> image_path;
+
+				read_image(image_path, in);
+				flip(in, out);
 				save_image("output.pgm", out);	
 				break;
 		}
