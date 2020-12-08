@@ -15,7 +15,7 @@ void read_image(char file_path[], Img& img)
 	file.open(file_path);
 	if(!file.is_open())
 	{
-		cout << "Erro: nao foi possivel abrir o arquivo" << endl;
+		cout << "Error: Could not open the file" << endl;
 		exit(0);
 	}
   
@@ -41,7 +41,7 @@ bool save_image(char file_name[], Img img)
 
 	if(!file.is_open())
 	{
-		cout << "Erro: nao foi possivel abrir o arquivo" << endl;
+		cout << "Error: Could not open the file" << endl;
 		exit(0);
 	}
 
@@ -64,15 +64,18 @@ bool save_image(char file_name[], Img img)
 }
 void copy_img(Img img_in, Img& img_out)
 {
-  img_out.width = img_in.width;
-  img_out.height = img_in.height;
-  for(int i = 0; i < img_in.width; i++)
-  {
-	for(int j = 0; j < img_in.height; j++)
+	for(int i=0; i < strlen(img_in.header); i++)
+		img_out.header[i] = img_in.header[i];
+
+	img_out.width = img_in.width;
+	img_out.height = img_in.height;
+	for(int i = 0; i < img_in.width; i++)
 	{
-	  img_out.matrix[i][j] = img_in.matrix[i][j];
+		for(int j = 0; j < img_in.height; j++)
+		{
+			img_out.matrix[i][j] = img_in.matrix[i][j];
+		}
 	}
-  }
 }
 
 void print_img(Img img)

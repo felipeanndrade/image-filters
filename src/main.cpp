@@ -66,7 +66,7 @@ void render_menu()
 
 				read_image(image_path, in);
 				binarization(in, out, limiar);
-				save_image(image_path, out);	
+				save_image("output.pgm", out);	
 				break;
 		}
 	}
@@ -74,9 +74,7 @@ void render_menu()
 
 int main()
 {
-
 	render_menu();
-
 	return 0;
 }
 
