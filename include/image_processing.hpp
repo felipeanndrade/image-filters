@@ -4,6 +4,14 @@
 #include <iostream>
 #include "utils.hpp"
 
+/*!
+ * Given a limiar,  the matrix in a binarized matrix
+ * values below the limiar become 0 and values above the limiar become 255.
+ *
+ * @param img_int Input image struct.
+ * @param img_out Output image struct.
+ * @param limiar Limiar delimiter of the function.
+ */
 void binarization(Img img_in, Img& img_out, int limiar);
 
 /*!
@@ -47,5 +55,11 @@ void flip(Img img_in, Img& img_out);
  * @param img_out Output image struct.
  */
 void reflection(Img img_in, Img& img_out);
+
+void crop(Img img_in, Img& img_out, int ir, int ic, int fr, int fc);
+
+void erode(Img img_in, Img& img_out);
+
+void increase(Img img_in, Img& img_out);
 
 #endif

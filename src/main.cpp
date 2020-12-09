@@ -24,14 +24,8 @@ void render_menu()
 						   " *  Rotate 90 degrees anti-clockwise          3\n" 
 						   " *  Flip image                                4\n"
 						   " *  Crop image                                5\n"
-						   " *  Reduce image size                         6\n"
-						   " *  Increase image size                       7\n"
-						   " *  Erosion filtering                         8\n"
-						   " *  Dilatation filtering                      9\n"
-						   " *  Convolution                               10\n"
-						   " *  Histogram equalization                    11\n"
-						   " *  Noise removal                             12\n"
-						   " *  Increase image size by interpolation      13\n"
+						   " *  Erosion filtering                         6\n"
+						   " *  Increase image size by interpolation      7\n"
 		              "=======================================================\n";
 
 	char option[] = " * Type a option number to select a function *\n";
@@ -61,10 +55,12 @@ void render_menu()
 			case 0:
 				cout << "Type the path of the image: " << endl;
 				cin >> image_path;
+
 				cout << "Type the limiar for the binarization" << endl;
 				cin >> limiar;
 
 				read_image(image_path, in);
+				check_header(in);
 				binarization(in, out, limiar);
 				save_image("output.pgm", out);	
 				break;
@@ -73,6 +69,7 @@ void render_menu()
 				cin >> image_path;
 
 				read_image(image_path, in);
+				check_header(in);
 				compute_negative(in, out);
 				save_image("output.pgm", out);	
 				break;
@@ -83,6 +80,7 @@ void render_menu()
 				cin >> limiar;
 
 				read_image(image_path, in);
+				check_header(in);
 				solarization(in, out, limiar);
 				save_image("output.pgm", out);	
 				break;
@@ -91,6 +89,7 @@ void render_menu()
 				cin >> image_path;
 
 				read_image(image_path, in);
+				check_header(in);
 				rotate_anti_h(in, out);
 				save_image("output.pgm", out);	
 				break;
@@ -99,8 +98,58 @@ void render_menu()
 				cin >> image_path;
 
 				read_image(image_path, in);
+				check_header(in);
 				flip(in, out);
 				save_image("output.pgm", out);	
+				break;
+			case 5:
+				cout << "Type the path of the image: " << endl;
+				cin >> image_path;
+
+				int initial_row, initial_column;
+				int final_row, final_column;
+
+				cout << "Type the initial row: " << endl;
+				cin >> initial_row;
+				cout << "Type the initial column: " << endl;
+				cin >> initial_column;
+				cout << "Type the final row: " << endl;
+				cin >> final_row;
+				cout << "Type the final column: " << endl;
+				cin >> final_column;
+
+				read_image(image_path, in);
+				check_header(in);
+
+				if(initial_row  > in.width || initial_column > in.height 
+			    || final_row > in.width || final_column > in.height)
+				{
+					cout << "Dimensions out of the boundaries" << endl;
+					exit(0);
+				}
+
+				crop(in, out, initial_row, initial_column, final_row, final_column);
+				save_image("output.pgm", out);	
+				break;
+
+			case 6:
+				cout << "Type the path of the image: " << endl;
+				cin >> image_path;
+
+				read_image(image_path, in);
+				check_header(in);
+				erode(in, out);
+				save_image("output.pgm", out);
+				break;
+
+			case 7:
+				cout << "Type the path of the image: " << endl;
+				cin >> image_path;
+
+				read_image(image_path, in);
+				check_header(in);
+				increase(in, out);
+				save_image("output.pgm", out);
 				break;
 		}
 	}

@@ -62,8 +62,11 @@ bool save_image(char file_name[], Img img)
 
 	file.close();
 
+	cout << "Effect applied and saved in the file output.pgm" << endl;
+
 	return true;
 }
+
 void copy_img(Img img_in, Img& img_out)
 {
 	for(int i=0; i < strlen(img_in.header); i++)
@@ -71,6 +74,7 @@ void copy_img(Img img_in, Img& img_out)
 
 	img_out.width = img_in.width;
 	img_out.height = img_in.height;
+	img_out.max = img_in.max;
 	for(int i = 0; i < img_in.width; i++)
 	{
 		for(int j = 0; j < img_in.height; j++)
@@ -94,3 +98,12 @@ void print_img(Img img)
 	cout << endl;
 }
 
+void check_header(Img img)
+{
+	if(!(img.header[0] == 'P' ) && !(img.header[1] == '2'))
+	{
+		cout << "Error: Image is not a BITMAP file of type P2/.pgm" << endl;
+		cout << "Please insert a valid .pgm file" << endl;
+		exit(0);
+	}
+}

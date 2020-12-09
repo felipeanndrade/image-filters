@@ -29,4 +29,6 @@ bool save_image(char file_name[], Img img);
 
 void copy_img(Img img_in, Img& img_out);
 
+void check_header(Img img);
+
 #endif
